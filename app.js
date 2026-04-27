@@ -1,22 +1,28 @@
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('SW Registered'))
+            .catch(err => console.log('SW Registration Failed', err));
+    });
+}
+
+// Mock Product Data
 const products = [
-  { id: 1, name: "Wireless Headphones", price: "$49" },
-  { id: 2, name: "Leather Wallet",      price: "$29" },
-  { id: 3, name: "Running Shoes",       price: "$89" },
+    { id: 1, name: "Wireless Headphones", price: "$99" },
+    { id: 2, name: "Smart Watch", price: "$199" },
+    { id: 3, name: "Bluetooth Speaker", price: "$49" }
 ];
 
-const container = document.getElementById("products");
-products.forEach(p => {
-  container.innerHTML += `
-    <div class="card">
-      <h3>${p.name}</h3>
-      <p>${p.price}</p>
-      <button onclick="alert('Added: ${p.name}')">Add to Cart</button>
-    </div>`;
-});
+const container = document.getElementById('product-list');
 
-// Register service worker
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js")
-    .then(() => console.log("SW registered"))
-    .catch(err => console.error("SW error:", err));
-}
+products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+        <h3>${p.name}</h3>
+        <p>${p.price}</p>
+        <button>Add to Cart</button>
+    `;
+    container.appendChild(card);
+});

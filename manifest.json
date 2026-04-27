@@ -1,10 +1,10 @@
 {
-  "name": "ShopPWA",
-  "short_name": "Shop",
-  "start_url": "/ecommerce-pwa/",
+  "name": "Ecommerce PWA",
+  "short_name": "E-Shop",
+"start_url": "/ecommerce-pwa/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#111111",
+  "theme_color": "#2196F3",
   "icons": [
     {
       "src": "https://via.placeholder.com/192",

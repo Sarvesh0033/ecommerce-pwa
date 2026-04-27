@@ -1,15 +1,25 @@
-const CACHE_NAME = "shop-pwa-v1";
-const ASSETS = [  "/ecommerce-pwa/",
+const CACHE_NAME = 'e-shop-v1';
+const ASSETS = [
+  "/ecommerce-pwa/",
   "/ecommerce-pwa/index.html",
   "/ecommerce-pwa/style.css",
-  "/ecommerce-pwa/app.js"];
+  "/ecommerce-pwa/app.js"
+];
 
-self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
+// Install Event - Caching Assets
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(ASSETS);
+        })
+    );
 });
 
-self.addEventListener("fetch", e => {
-  e.respondWith(
-    caches.match(e.request).then(res => res || fetch(e.request))
-  );
+// Fetch Event - Serve from Cache if Offline
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+        })
+    );
 });
